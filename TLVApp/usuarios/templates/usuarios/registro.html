@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% include 'messages.html' %}
 
 {% block registro %}
     <div class="container text-center">
@@ -9,7 +10,7 @@
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
-                {{formulario|crispy}}
+                {{form|crispy}}
             </div>
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>

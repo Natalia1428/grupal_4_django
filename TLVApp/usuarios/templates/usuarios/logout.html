@@ -2,8 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block login %}
-    <h1>Se cerró la sesión del usuario: {{user.username}}</h1>
-    <h2>Hasta luego {{user.username}}</h2>
+    <h2>Has cerrado tu sesión {{user.username}}</h2>
+    <div class="border-top pt-3" style="min-height: 65vh;">
+        <small class="text-muted">
+            <a href="{% url 'usuario-login' %}">Iniciar Sesión</a>
+        </small>
+    </div>
 
 {% endblock %}
 
