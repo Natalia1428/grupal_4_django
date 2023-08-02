@@ -14,8 +14,10 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!-- css static -->
         <link rel="stylesheet" href="{% static 'TLV_App/landing.css' %}">
-        <!-- font awesome icons -->
+        <!-- font awesome icons 5.7.1 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- font awesome icons 6.4.0 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 <body>  
     <nav class="navbar navbar-dark bg-dark static-top">
@@ -45,15 +47,15 @@
                         <li class="nav-item">
                             <a class="nav-link active"
                                 aria-current="page"
-                                href="{%url 'home' %}">Inicio</a>
+                                href="{%url 'home' %}">Inicio <i class="fa-solid fa-house"></i></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{%url 'cliente' %}"> Clientes</a>
+                                href="{%url 'cliente' %}"> Clientes <i class="fa-solid fa-user-group"></i></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{%url 'contacto' %}"> Contáctanos</a>
+                                href="{%url 'contacto' %}"> Contáctanos <i class="fa-solid fa-envelope"></i></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"
@@ -62,14 +64,16 @@
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <!-- si el usuario está logeado, no mostrar estos links -->
-                                <li><a class="dropdown-item" href="{% url 'usuario-registro' %}">Regístrate</a></li>
-                                <li><a class="dropdown-item" href="{% url 'usuario-login' %}">Iniciar Sesión</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something
-                                        else here</a></li>
+                                <!-- si el usuario está logeado, sólo mostrar log out. -->
+                                {% if user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'usuario-logout' %}">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-perfil' %}">Perfil <i class="fa-regular fa-user"></i></a></li>
+                                {% else %}
+                                <!-- si el usuario NO está logeado, mostrar iniciar sesión y regístrate. -->
+                                    <li><a class="dropdown-item" href="{% url 'usuario-login' %}">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-registro' %}">Regístrate <i class="fas fa-user-plus"></i></a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
@@ -82,6 +86,17 @@
             </div>
         </div>
     </nav>
+
+    {% for message in messages %}
+    <div class="container-fluid p-0 me-auto">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="True">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
 
     <!-- bloque que solo se verá en cliente.html -->
     {% block listado_clientes %} {% endblock %}
