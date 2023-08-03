@@ -5,11 +5,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TeLoVendo</title>
+        <!-- bootstrap  5 -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
             crossorigin="anonymous">
+        <!-- bootstrap 4 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!-- iconos bootstrap 5 -->
         <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!-- css static -->
@@ -22,7 +26,7 @@
 <body>  
     <nav class="navbar navbar-dark bg-dark static-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Bienvenidos a TeLoVendo</a>
+            <a class="navbar-brand" href="#">Bienvenidos a TeLoVendo | sesión: {{user.username}}</a>
             <button class="navbar-toggler" type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar"
@@ -61,27 +65,22 @@
                             <a class="nav-link dropdown-toggle" href="#"
                                 role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown
+                                Ver más
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <!-- si el usuario está logeado, sólo mostrar log out. -->
                                 {% if user.is_authenticated %}
                                     <li><a class="dropdown-item" href="{% url 'usuario-logout' %}">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a></li>
                                     <li><a class="dropdown-item" href="{% url 'usuario-perfil' %}">Perfil <i class="fa-regular fa-user"></i></a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cliente-create' %}">Agregar Cliente <i class="fa-solid fa-user-plus"></i></a></li>
                                 {% else %}
                                 <!-- si el usuario NO está logeado, mostrar iniciar sesión y regístrate. -->
                                     <li><a class="dropdown-item" href="{% url 'usuario-login' %}">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a></li>
                                     <li><a class="dropdown-item" href="{% url 'usuario-registro' %}">Regístrate <i class="fas fa-user-plus"></i></a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 {% endif %}
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search"
-                            placeholder="Search" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -119,10 +118,18 @@
 
     <!-- perfil.html -->
     {% block perfil %} {% endblock %}
+
+    <!-- formulario para crear un cliente (estando logeado) -->
+    {% block usuario %} {% endblock %}
     
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
+
+    <!-- scripts bootstrap 4 -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

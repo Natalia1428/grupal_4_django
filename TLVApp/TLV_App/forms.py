@@ -1,6 +1,6 @@
 from django import forms
 # importar Model de models.py
-from .models import Proveedor
+from .models import Proveedor, Usuario
 
 # form no asociado, en este caso es para guardar informacion
 # del formulario de contactos.
@@ -15,5 +15,3 @@ class ProveedorForm(forms.ModelForm):
     class Meta:
         model = Proveedor
         fields = ['nombre', 'email', 'mensaje']
-
-

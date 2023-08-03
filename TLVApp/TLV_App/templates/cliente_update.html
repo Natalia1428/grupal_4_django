@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block usuario %}
+    <div class="container">
+        <h3>Actualizar cliente: {{usuario.nombre}} {{usuario.apellido}}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form | crispy}}   
+        <button type="submit" class="btn btn-primary mt-3">Actualizar Datos</button>
+        </form>
+    </div>
+{% endblock %}
