@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import Perfil
 
-# @receiver(post_save, sender=User)
-# def crear_perfil(sender, instance, created, **kwargs):
-#     if created:
-#         Perfil.objects.create(usuario=instance)
+@receiver(post_save, sender=User)
+def crear_perfil(sender, instance, created, **kwargs):
+    if created:
+        Perfil.objects.create(usuario=instance)
 
-# # guardar Perfil creado en la base de datos.
-# @receiver(post_save, sender = User)
-# def guardar_perfil(sender, instance, **kwargs):
-#     instance.perfil.save()
+# guardar Perfil creado en la base de datos.
+@receiver(post_save, sender = User)
+def guardar_perfil(sender, instance, **kwargs):
+    instance.perfil.save()

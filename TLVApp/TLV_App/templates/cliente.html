@@ -13,10 +13,14 @@
                         <h5>{{cliente.nombre}} {{cliente.apellido}}</h5>
                         <p>{{cliente.email}}</p>
                         <p>{{cliente.pais}}</p>
-                        <p>{{cliente.edad}}</p>
+                        <p>{{cliente.edad}} años</p>
                         <p>{{cliente.hobby}}</p>
                     </div>
+                    <div class="container align-content-center">
+                        <a class ="btn btn-primary w-25 mb-2" href="{% url 'cliente-update' pk=cliente.id%}">Actualizar Cliente</a>
+                    </div>
                 </div>
+                
         {% endfor %}
         </div>
     </div>
@@ -26,7 +30,7 @@
 
 {% block footer %}
 <!-- Footer -->
-<footer id="footer-landing" class="bg-dark text-center text-white fixed-bottom">
+<footer id="footer-landing" class="bg-dark text-center text-white">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
         <!-- Section: Social media -->
