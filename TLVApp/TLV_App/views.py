@@ -8,6 +8,10 @@ from django.contrib import messages
 # vistas genéricas Django
 from django.views.generic import CreateView, DetailView, UpdateView
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.urls import reverse
+
 def vista_1(request):
     return render(request, 'landing.html')
 
@@ -45,10 +49,16 @@ class CreateUsuarioView(CreateView):
         form.instance.autor = self.request.user
         return super().form_valid(form)
     
-class UpdateUsuarioView(UpdateView):
+class UpdateUsuarioView(LoginRequiredMixin, UpdateView):
     model = Usuario
     template_name = 'cliente_update.html'
     fields = ['pais', 'edad', 'hobby']
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.warning(request, "Debes iniciar sesión para actualizar un cliente.")
+            return redirect(reverse('usuario-login'))
+        return super().dispatch(request, *args, **kwargs)
     
 
     def form_valid(self,form):
