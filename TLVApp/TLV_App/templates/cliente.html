@@ -2,27 +2,30 @@
 {% load static %}
 {% block listado_clientes %}
 
-
 <div class="container text-center">
     <h1 class="h1-listado">Listado Clientes</h1>
-    <div class="row">
-        <div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center mt-5"></div>
+    <div class="row row-cols-1 row-cols-md-3 d-flex">
         {% for cliente in clientes %}
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5>{{cliente.nombre}} {{cliente.apellido}}</h5>
-                        <p>{{cliente.email}}</p>
-                        <p>{{cliente.pais}}</p>
-                        <p>{{cliente.edad}} años</p>
-                        <p>{{cliente.hobby}}</p>
-                    </div>
-                    <div class="container align-content-center">
-                        <a class ="btn btn-primary w-25 mb-2" href="{% url 'cliente-update' pk=cliente.id%}">Actualizar Cliente</a>
-                    </div>
+        <div class="col mb-4 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body">
+                    <h5 class="card-title">{{cliente.nombre}} {{cliente.apellido}}</h5>
+                    <p class="card-text">{{cliente.email}}</p>
+                    <p class="card-text">{{cliente.pais}}</p>
+                    <p class="card-text">{{cliente.edad}} años</p>
+                    <p class="card-text">{{cliente.hobby}}</p>
                 </div>
-                
-        {% endfor %}
+                <div class="container align-content-center">
+                    <a class="btn btn-primary w-100 mb-2"
+                        href="{% url 'cliente-update' pk=cliente.id%}">Actualizar
+                        Cliente</a>
+                </div>
+            </div>
         </div>
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div><div class="row row-cols-1 row-cols-md-3 d-flex">
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 

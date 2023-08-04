@@ -12,21 +12,21 @@
             integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
             crossorigin="anonymous">
         <!-- bootstrap 4 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
         <!-- iconos bootstrap 5 -->
         <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <!-- css static -->
-        <link rel="stylesheet" href="{% static 'TLV_App/landing.css' %}">
         <!-- font awesome icons 5.7.1 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- font awesome icons 6.4.0 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- css static -->
+        <link rel="stylesheet" type="text/css" href="{% static 'TLV_App/landing.css' %}">
     </head>
 <body>  
     <nav class="navbar navbar-dark bg-dark static-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Bienvenidos a TeLoVendo | sesión: {{user.username}}</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Bienvenidos a TeLoVendo | sesión: {{user.username}}</a>
             <button class="navbar-toggler" type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar"
@@ -51,15 +51,15 @@
                         <li class="nav-item">
                             <a class="nav-link active"
                                 aria-current="page"
-                                href="{%url 'home' %}">Inicio <i class="fa-solid fa-house"></i></a>
+                                href="{%url 'home' %}"><i class="fa-solid fa-house"></i> Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{%url 'cliente' %}"> Clientes <i class="fa-solid fa-user-group"></i></a>
+                                href="{%url 'cliente' %}"><i class="fa-solid fa-user-group"></i> Clientes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{%url 'contacto' %}"> Contáctanos <i class="fa-solid fa-envelope"></i></a>
+                                href="{%url 'contacto' %}"><i class="fa-solid fa-envelope"></i> Contáctanos</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"
@@ -70,13 +70,13 @@
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <!-- si el usuario está logeado, sólo mostrar log out. -->
                                 {% if user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'usuario-logout' %}">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a></li>
-                                    <li><a class="dropdown-item" href="{% url 'usuario-perfil' %}">Perfil <i class="fa-regular fa-user"></i></a></li>
-                                    <li><a class="dropdown-item" href="{% url 'cliente-create' %}">Agregar Cliente <i class="fa-solid fa-user-plus"></i></a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-perfil' %}"><i class="fa-regular fa-user"></i> Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cliente-create' %}"><i class="fa-solid fa-user-plus"></i> Agregar Cliente</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                                 {% else %}
                                 <!-- si el usuario NO está logeado, mostrar iniciar sesión y regístrate. -->
-                                    <li><a class="dropdown-item" href="{% url 'usuario-login' %}">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a></li>
-                                    <li><a class="dropdown-item" href="{% url 'usuario-registro' %}">Regístrate <i class="fas fa-user-plus"></i></a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-login' %}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'usuario-registro' %}"><i class="fas fa-user-plus"></i> Regístrate</a></li>
                                 {% endif %}
                             </ul>
                         </li>
